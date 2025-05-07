@@ -6,6 +6,7 @@ import { TryCatch } from "../middlewares/error.middlewares.js";
 import ErrorHandler from "../util/utility-class.js";
 import { Restaurant } from "../types/types.js";
 import { ResultSetHeader } from "mysql2";
+import { ExtenedRequest } from "../middlewares/auth.middleware.js";
 
 export const registerRestaurant = TryCatch(async (req: Request, res: Response, next: NextFunction) =>
 {
@@ -41,6 +42,7 @@ export const registerRestaurant = TryCatch(async (req: Request, res: Response, n
         const token = jwt.sign({ id: restaurantId }, process.env.JWT_SECRET!, { expiresIn: "1d" });
 
         return res.status(201).json({
+            success:true,
             message: "Restaurant registered successfully.",
             restaurantId,
             token,
@@ -82,13 +84,14 @@ export const login = TryCatch(async (req: Request, res: Response, next:NextFunct
         });
 
         return res.status(200).json({
+            success:true,
             message: "Login successful.",
             restaurantId: restaurant.id,
             token,
         });
 });
 
-export const updateRestaurantProfile = TryCatch(async (req: Request, res: Response, next: NextFunction) => {
+export const updateRestaurantProfile = TryCatch(async (req: ExtenedRequest, res: Response, next: NextFunction) => {
     const paramId = parseInt(req.params.id);
     const tokenRestaurantId = req.restaurantId; 
 
@@ -104,6 +107,7 @@ export const updateRestaurantProfile = TryCatch(async (req: Request, res: Respon
     );
 
     return res.status(200).json({
+        success:true,
         message: "Restaurant profile updated successfully.",
     });
 });
@@ -123,7 +127,10 @@ export const getRestaurantProfile = TryCatch(async (req: Request, res: Response,
         return next(new ErrorHandler("Restaurant not found", 404));
     }
 
-    return res.status(200).json({ restaurant });
+    return res.status(200).json({
+        success:true,
+        restaurant
+    });
 });
 
 

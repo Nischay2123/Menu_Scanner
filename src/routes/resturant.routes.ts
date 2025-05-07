@@ -1,5 +1,5 @@
 import express from "express";
-import { getRestaurantProfile, login, registerRestaurant, updateRestaurantProfile } from "../controllers/restaurant.js";
+import { getRestaurantProfile, login, registerRestaurant, updateRestaurantProfile } from "../controllers/restaurant.controller.js";
 import { isAuthenticated } from "../middlewares/auth.middleware.js";
 
 const app = express();

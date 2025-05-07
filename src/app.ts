@@ -13,6 +13,7 @@ dotenv.config({
 
 // routes
 import Restaurant from "./routes/resturant.routes.js";
+import Menu_Items from "./routes/menu-item.routes.js";
 
 
 
@@ -29,6 +30,7 @@ app.get("/",(req,res)=>{
     return res.send(`Api is working with api/v1`)
 })
 app.use("/api/v1/restaurant",Restaurant)
+app.use("/api/v1/restaurant",Menu_Items)
 
 
 

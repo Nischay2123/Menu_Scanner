@@ -2,9 +2,11 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import ErrorHandler from "../util/utility-class.js";
 
+export interface ExtenedRequest extends Request{
+  restaurantId?: number;
+}
 
-
-export const isAuthenticated = (req: Request, res: Response, next: NextFunction) => {
+export const isAuthenticated = (req: ExtenedRequest, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
@@ -15,7 +17,7 @@ export const isAuthenticated = (req: Request, res: Response, next: NextFunction)
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET!) as { id: number };
-    ( req as Request).restaurantId = decoded.id; // Attach to request
+    req.restaurantId = decoded.id; // Attach to request
     next();
   } catch (error: any) {
     if (error.name === "TokenExpiredError") {

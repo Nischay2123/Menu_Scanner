@@ -16,3 +16,18 @@ export type controllerTypes = (
     password: string;
     created_at: Date;
 };
+
+
+export interface MenuItem {
+  id: number;
+  restaurant_id: number;
+  name: string;
+  description: string;
+  price: number;
+  image_url: string | null;
+  category: string | null;
+  is_available: boolean;
+  created_at: Date;
+  updated_at: Date;
+}
+
