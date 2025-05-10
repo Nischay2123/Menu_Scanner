@@ -1,11 +1,16 @@
 import mysql from 'mysql2/promise';
+import dotenv from "dotenv"
+dotenv.config()
+
 
 const pool = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  password: "nischay@123",
-  database: "menu_scanner_db"
+  host: process.env.HOST,
+  user: process.env.USER,
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE
 });
+
+
 
 console.log('MySQL connection pool created.');
 

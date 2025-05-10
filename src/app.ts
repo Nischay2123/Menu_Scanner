@@ -1,19 +1,20 @@
+import dotenv from 'dotenv';
+dotenv.config({
+    path:"./.env"
+})
+ 
 import express from 'express'
 import pool from './util/database.js';
 import morgan from 'morgan'
 import cors from "cors";
 import { errorMiddlerware } from "./middlewares/error.middlewares.js";
-import dotenv from 'dotenv';
-dotenv.config({
-    path:"./.env"
-})
-    
 
 
 
 // routes
 import Restaurant from "./routes/resturant.routes.js";
 import Menu_Items from "./routes/menu-item.routes.js";
+import QR from "./routes/qr.routes.js";
 
 
 
@@ -31,10 +32,12 @@ app.get("/",(req,res)=>{
 })
 app.use("/api/v1/restaurant",Restaurant)
 app.use("/api/v1/restaurant",Menu_Items)
+app.use("/api/v1/restaurant",QR)
 
 
 
 app.use(errorMiddlerware)
+app.use("/uploads",express.static("uploads"))
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

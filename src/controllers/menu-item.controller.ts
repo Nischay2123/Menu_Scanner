@@ -39,7 +39,7 @@ export const getMenuItems = TryCatch(async (req: Request, res: Response, next: N
   });
   
 export const updateMenuItem = TryCatch(async (req: ExtenedRequest, res: Response, next: NextFunction) => {
-    const itemId = parseInt(req.params.id); // Fixed: using params.id instead of restaurantId
+    const itemId = parseInt(req.params.id); 
     const { name, description, halfPrice, fullPrice, image_url, category, isVeg, is_available } = req.body;
   
     const [existing] = await pool.query(
@@ -65,7 +65,7 @@ export const updateMenuItem = TryCatch(async (req: ExtenedRequest, res: Response
   });
   
 export const deleteMenuItem = TryCatch(async (req: ExtenedRequest, res: Response, next: NextFunction) => {
-    const itemId = parseInt(req.params.id); // Fixed: using params.id instead of restaurantId
+    const itemId = parseInt(req.params.id); 
   
     const [existing] = await pool.query(
       "SELECT * FROM menu_items WHERE id = ? AND restaurant_id = ?",

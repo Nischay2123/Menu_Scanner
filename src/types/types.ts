@@ -1,4 +1,5 @@
 import { NextFunction, Response, Request } from "express";
+import { RowDataPacket } from "mysql2";
 
 export type controllerTypes = (
     req: Request,
@@ -29,5 +30,13 @@ export interface MenuItem {
   is_available: boolean;
   created_at: Date;
   updated_at: Date;
+}
+
+
+export interface QRRecord  extends RowDataPacket {
+  id: number;
+  restaurant_id: number;
+  qr_code_url: string;
+  created_at: Date;
 }
 
